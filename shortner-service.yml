@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shortner-service-app
+  labels:
+    app: shortner-service-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shortner-service-app
+  template:
+    metadata:
+      labels:
+        app: shortner-service-app
+    spec:
+      containers:
+        - name: shortner-service-app
+          image: collins6299/shortner-service:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9091
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shortner-service-svc
+spec:
+  ports:
+    - targetPort: 9091
+      port: 80
+  selector:
+    app: shortner-service-app

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linkify-app
+  labels:
+    app: linkify-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app : linkify-app
+  template:
+    metadata:
+      labels:
+        app: linkify-app
+    spec:
+      containers:
+      - name: linkify-app
+        image: collins6299/linkfy:0.0.1
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 9090
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name:  linkify-svc
+spec:
+  selector:
+    app:  linkify-app
+  ports:
+  - port:  80
+    targetPort:  9090
