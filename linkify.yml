@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: linkify-app
-        image: collins6299/linkfy:0.0.1
+        image: collins6299/linkify:0.0.1
         imagePullPolicy: Always
         ports:
           - containerPort: 9090
